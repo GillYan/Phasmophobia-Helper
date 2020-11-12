@@ -16,6 +16,7 @@ input.ck-btn + label {
   padding: 5px 8px;
   cursor: pointer;
   border-radius: 5px;
+  color: black
 }
 input.ck-btn + label:active,
 input.ck-btn:checked + label {
