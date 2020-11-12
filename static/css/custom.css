@@ -1,0 +1,23 @@
+body {
+    background-image: linear-gradient(to bottom right, rgba(155,185,255,1), rgba(155,185,255,0));
+}
+
+.text-center {
+	text-align: center;
+}
+
+/* Style the label so it looks like a button */
+label {
+	border: 2px outset #cccccc;
+	background-color: #cccccc;
+	position: relative;
+	z-index: 3;
+	padding: 4px;
+}
+
+/* CSS to make the checkbox disappear (but remain functional) 
+label input {
+	position: absolute;
+	visibility: hidden;
+}
+*/
