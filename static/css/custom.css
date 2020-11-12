@@ -7,17 +7,39 @@ body {
 }
 
 /* Style the label so it looks like a button */
-label {
-	border: 2px outset #cccccc;
-	background-color: #cccccc;
-	position: relative;
-	z-index: 3;
-	padding: 4px;
+input.ck-btn {
+  display: none;
+}
+input.ck-btn + label {
+  border: 1px solid grey;
+  background: #B7D1D4;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+input.ck-btn + label:active,
+input.ck-btn:checked + label {
+  box-shadow: 0px 0px 3px inset;
+  background: #33CDDF;
 }
 
-/* CSS to make the checkbox disappear (but remain functional) 
-label input {
-	position: absolute;
-	visibility: hidden;
+/*Hover and click effects*/
+input.ck-btn + label:hover {
+  box-shadow: 0px 1px 3px red;
 }
-*/
+input.ck-btn + label:active {
+  box-shadow: 0 1px 3px #B5361F;
+  transform: translateY(4px);
+}
+
+
+/*Disable selection of text*/
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
