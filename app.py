@@ -101,6 +101,7 @@ def getTypes(name=None):
         #check the number of entered evidences
         if size > 3:
             cant += typeString
+            remainingEvidence = [""] * 12
         elif size == 0:
             can += typeString
             remainingEvidence = [""] * 12
