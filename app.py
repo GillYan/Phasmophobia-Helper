@@ -8,7 +8,7 @@ app = Flask(__name__, static_url_path='')
 #set ghost type evidences
 spirit = ["Spirit Box", "Fingerprints", "Ghost Writing"]
 wraith = ["Spirit Box", "Fingerprints", "Freezing Temperatures"]
-phantom = ["EMF5", "Ghost Orb", "Freezing Temperatures"]
+phantom = ["EMF5", "Ghost Orb", "Freezing Temperatures Temperatures"]
 poltergeist = ["Spirit Box", "Fingerprints", "Ghost Orb"]
 banshee = ["EMF5", "Fingerprints", "Freezing Temperatures"]
 jinn = ["EMF5", "Spirit Box", "Ghost Orb"]
@@ -41,32 +41,45 @@ def getPossibilities(evidence):
     s = set(evidence)
     can = ""
     cant = ""
+    remaining = []
     
     #go through all ghost types by index
     for i in range(len(typeList)):
         #check the difference in evidences between the given evidence and the ghost type
-        #check variable becomes a list of evidences for the given ghost type that are not part
+        #check variable becomes a list of remaining evidences for the given ghost type that are not part
         #of the given evidence list
         check = [x for x in typeList[i] if x not in s]
+        remaining.append("<br>".join(check));
         
         #check which ghosts satisfy all evidences in the provided evidence list
         if len(check) <= 3 - num:
             can += typeDict.get(i, "err")
-            can += " ("
-            can += ", ".join(check)
-            can += "), "
+            can += ", "
+            
         else:
             cant += typeDict.get(i, "err")
             cant += ", "
 
+
     #strip trailing commas
-    if can and num == 3:
-        can = can[:-5]
-    elif can:
+    if can:
         can = can[:-2]
     if cant:
         cant = cant[:-2]
-    return can, cant
+
+    #change not possible ghost type's remaining evidence to blank strings
+    for i in range(len(remaining)):
+        if num == 2:
+            if remaining[i].count("<br>") >= 1:
+                remaining[i] = ""
+        elif num == 1:
+            if remaining[i].count("<br>") >= 2:
+                remaining[i] = ""
+        else:
+            remaining[i] = ""
+
+
+    return can, cant, remaining
 
 @app.route('/')
 def index(name=None):
@@ -79,18 +92,21 @@ def getTypes(name=None):
         #intialize possible and not possible ghost types string
         can = ""
         cant = ""
+        remainingEvidence = []
 
         #get the selected evidences in a list
         evidence = request.json
         size = len(evidence)
-        #check if there is 3 or less evidences
+
+        #check the number of entered evidences
         if size > 3:
             cant += typeString
         elif size == 0:
             can += typeString
+            remainingEvidence = [""] * 12
         #valid number of evidences, start checking
         else:
-            can, cant = getPossibilities(evidence)
+            can, cant, remainingEvidence = getPossibilities(evidence)
 
         #if no possibilities, set string to None
         if not can:
@@ -99,5 +115,5 @@ def getTypes(name=None):
             cant = "None"
 
         #return as JSON with keys possible and impossible
-        return jsonify(possible = can, impossible = cant)
+        return jsonify(possible = can, impossible = cant, evidence = remainingEvidence)
 
