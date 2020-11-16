@@ -8,7 +8,7 @@ app = Flask(__name__, static_url_path='')
 #set ghost type evidences
 spirit = ["Spirit Box", "Fingerprints", "Ghost Writing"]
 wraith = ["Spirit Box", "Fingerprints", "Freezing Temperatures"]
-phantom = ["EMF5", "Ghost Orb", "Freezing Temperatures Temperatures"]
+phantom = ["EMF5", "Ghost Orb", "Freezing Temperatures"]
 poltergeist = ["Spirit Box", "Fingerprints", "Ghost Orb"]
 banshee = ["EMF5", "Fingerprints", "Freezing Temperatures"]
 jinn = ["EMF5", "Spirit Box", "Ghost Orb"]
