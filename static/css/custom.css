@@ -72,7 +72,7 @@ input.ck-btn + label:active {
 }
 
 /* Set max font size to 16px */
-@media (min-width: 360px) {
+@media (min-width: 361px) {
   .box {
     font-size: 16px;
   }
